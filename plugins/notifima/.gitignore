@@ -1,0 +1,8 @@
+node_modules
+assets
+!/src/assets/
+languages
+release
+vendor
+.circleci/
+.phpunit.result.cache

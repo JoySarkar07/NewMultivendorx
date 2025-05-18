@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        environment:
+            PMA_HOST: tests-mysql
+            PMA_USER: root
+            PMA_PASSWORD: password
+        ports:
+            - "8081:80"
+        networks:
+            - c70bbb6143f1fc1cda037ccd98996dc7_default
+
+networks:
+    c70bbb6143f1fc1cda037ccd98996dc7_default:
+        external: true
