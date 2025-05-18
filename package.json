@@ -12,9 +12,9 @@
   },
   "private": true,
   "scripts": {
-    "build": "pnpm -r --workspace-concurrency=Infinity --stream '/^build:.*$/'",
-    "clean": "rimraf -g '**/node_modules' 'plugins/*/vendor' && pnpm store prune",
+    "build": "pnpm -r --workspace-concurrency=Infinity --stream \"/^build:project:.*$/\"",
     "lint": "pnpm -r lint",
+    "clean": "rimraf -v -g \"**/node_modules\" \"plugins/*/vendor\" \"plugins/*/languages\" && pnpm store prune",
     "sync-dependencies": "pnpm exec syncpack -- fix-mismatches",
     "preinstall": "npx only-allow pnpm"
   },

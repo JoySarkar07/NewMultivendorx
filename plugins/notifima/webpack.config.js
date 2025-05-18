@@ -29,17 +29,14 @@ module.exports = {
             cacheGroups: {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
-                    name( module ) {
-                        const packagePath = module.context.match(
-                            /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-                        );
-                        if ( ! packagePath ) return "externals/vendor"; // fallback
-                        const packageName = packagePath[ 1 ]
-                            .replace( "@", "" )
-                            .replace( "/", "-" );
-                        return `externals/vendor-${ packageName }`;
+                    name(module) {
+                    const path = module.context;
+                    const match = path.match(/[\\/]node_modules[\\/](?:\.pnpm[\\/])?((@[^\\/]+[\\/][^\\/]+)|([^\\/]+))/);
+                    if (!match) return 'externals/vendor-unknown';
+                    const raw = (match[2] || match[3]);
+                    return `externals/vendor-${raw.replace(/[\\/@]/g, '-')}`;
                     },
-                    chunks: "all",
+                    chunks: 'all',
                     priority: -10,
                     reuseExistingChunk: true,
                 },

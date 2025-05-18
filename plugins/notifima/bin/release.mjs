@@ -15,7 +15,6 @@ const pluginFiles = [
     "languages/",
     "log/",
     "templates/",
-    "vendor/",
     "config.php",
     "composer.lock",
     "composer.json",
@@ -70,26 +69,26 @@ exec(
             return;
         }
 
-        // exec(
-        //     'composer install --optimize-autoloader --no-dev',
-        //     {
-        //         cwd: dest
-        //     },
-        //     ( error ) => {
-        //         if ( error ) {
-        //             console.log(
-        //                 chalk.red(
-        //                     `❌ Could not install composer in ${ dest } directory.`
-        //                 )
-        //             );
-        //             console.log( chalk.bgRed.black( error ) );
+        exec(
+            'composer install --optimize-autoloader --no-dev',
+            {
+                cwd: dest
+            },
+            ( error ) => {
+                if ( error ) {
+                    console.log(
+                        chalk.red(
+                            `❌ Could not install composer in ${ dest } directory.`
+                        )
+                    );
+                    console.log( chalk.bgRed.black( error ) );
 
-        //             return;
-        //         }
+                    return;
+                }
 
-        //         console.log(
-        //             `⚡️ Installed composer packages in ${ dest } directory.`
-        //         );
+                console.log(
+                    `⚡️ Installed composer packages in ${ dest } directory.`
+                );
 
         // Removing files that is not needed in the production now.
         removeFiles.forEach( ( file ) => {
@@ -121,7 +120,7 @@ exec(
                 console.log( chalk.green( `✅  ${ zipFile } is ready. 🎉` ) );
             }
         );
-        // }
-        // );
+        }
+        );
     }
 );
